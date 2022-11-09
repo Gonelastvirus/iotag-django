@@ -28,16 +28,16 @@
       </button>
   <div class="collapse navbar-collapse text-center" id="navbarNav" >
   <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-          <a class="nav-link" href="{% url 'configure'%}" style="color:	#f7f1f1">⚒Configure </a>
-          </li>
-      <li class="nav-item">
-        <a class="nav-link" href="" style="color:	#f7f1f1">Export Data</a>
-        </li>
+    {% if user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'configure'%}" style="color:	#f7f1f1">⚒Configure </a>
+      </li>
+    <li class="nav-item">
+    <a class="nav-link" href="" style="color:	#f7f1f1">Export Data</a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'setting'%}"  style="color:#f7f1f1">⚙Settings</a>
     </li>
-    {% if user.is_authenticated %}
     <li class="nav-item">
     <a class="nav-link" href="{% url 'logout' %}"  style="color: #f7f1f1">⚡Logout</a>
     </li>
