@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+     <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style type="text/css">
+        body{
+          background:  #e4f2fc;;
+        }
+        .container1{
+          padding-top: 300px;
+        }
+        .form-login{
+            margin: 0 auto;
+            max-width: 400px;
+            background-color: white;
+            padding:15px;
+        }
+        .form-login h2{
+            text-align: center;
+        }
+
+      </style>
+</head>
+<body> 
+  <nav id="topNav" class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{%static 'iotapp/Logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="smartAg Logo">
+          <span>SM328</span>
+      </a>
+    </div>
+</nav>
+    <div class="container1">
+        <form class="form-login" action="login" method="post">
+            {% csrf_token %}
+            <h2><b>Welcome</b></h2>
+            <p>LogIn with Your Account to Enter into the System</p><br>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" name="username" placeholder="Username" class="form-control" >
+                    </div>
+                    <div class="col-md-6">
+                      <input type="password" name="password" placeholder="Password" class="form-control" >
+                    </div>
+                </div>
+            </div><br>
+            <input type="submit" class="btn btn-success btn-block" name="" value="submit"><br>
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Don't have an account</a>
+            </li>
+            </ul>
+            {% if messages %}
+            {% for message in messages %}
+            <!-- Error Alert while registration; message from views.py -->
+            <div class="alert alert-danger alert-dismissible fade show">
+                <strong>Error!</strong> {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+        </form>
+    </div>     
+</body>
+</html>
