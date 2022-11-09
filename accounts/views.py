@@ -26,8 +26,10 @@ def register(request):
         email=request.POST.get("email")
         password=request.POST.get("password")
         confirm_password=request.POST.get("confirm_password")
-        print(first_name)
         if password==confirm_password:
+            if len(password)<8:
+                messages.info(request,"Password must be 8 or more character long",'register.html')
+                return redirect('register')
             if User.objects.filter(username=username).exists():
                 messages.info(request,"Username is taken",'register.html')
                 return redirect('register')

@@ -4,7 +4,42 @@
 
 {% if user.is_authenticated %}
  <!-- if user is login plot its data the aunthetic user code goes here-->
- <h1>Hello, {{user.first_name}}!!! Laude</h1>
+ <div class="row justify-content-center my-3">
+    <div class="col-5">
+        <div style="max-width: 900px; max-height: 500px;">
+            <canvas id="myChart" width="900" height="500"></canvas>
+        </div>
+    </div>
+        <div class="col-md-9 text-center">
+          <h5 id="hometext" class="font-weight-bold">Soil Moisture💧</h5>
+        </div>
+  </div>
+ <script>
+    var dataObj={
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6],
+            datasets: [{
+                label: 'Real time data',
+                borderColor:'red',
+                data: [12, 19, 3, 5, 2, 3],
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    }
+    var ctx = document.getElementById('myChart').getContext('2d');
+    window.myLine = new Chart(ctx,dataObj );
+    </script>
+
+<!-- ----------------------------------------------------------------------->
 {% else %}
 <div class="row justify-content-center my-3">
     <div class="col-5">
