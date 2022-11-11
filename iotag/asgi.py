@@ -8,15 +8,26 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/asgi/
 """
 
 import os
-from channels.routing import ProtocolTypeRouter
-from django.core.asgi import get_asgi_application
 
+from django.core.asgi import get_asgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'iotag.settings')
 
+from channels.routing import ProtocolTypeRouter,URLRouter
+from channels.auth import AuthMiddlewareStack
+
+from django.urls import path
+from iotapp import consumer
+
+from django.contrib.auth.models import User
+
+
+       
+websocket_urlPattern=[
+    path('polData',consumer.DashConsumer.as_asgi()),
+]
 
 application=ProtocolTypeRouter({
+    # 'http':
+    'websocket':AuthMiddlewareStack(URLRouter(websocket_urlPattern))
 
-'http':get_asgi_application(),
-
-    
 })

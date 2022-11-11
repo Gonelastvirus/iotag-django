@@ -4,6 +4,29 @@
 
 {% if user.is_authenticated %}
  <!-- if user is login plot its data the aunthetic user code goes here-->
+ <script>
+    let userurl='ws://127.0.0.1:8000//ws/polData'
+    let socket =new WebSocket(userurl);
+        socket.onopen =function(e){
+            alert('Connection established');
+        };
+    
+        socket.onmessage = function(e){
+            console.log(e.data);
+            var recData=JSON.parse(e.data); //parse json data
+            dataObjNew=dataObj['data']['datasets'][0]['data'];//dataobjnew is created
+            dataObjNew.shift(); // switch to the the new value
+            dataObjNew.push(recData.value);//push receive value
+            dataObj['data']['datasets'][0]['data']=dataObjNew;// update js code entry with rec data object
+            window.myLine.update();//update graph without reloading
+    
+        };
+    
+        socket.onclose = function(e){
+            alert('Connection CLosed');
+        };
+        
+      </script>
  <div class="row justify-content-center my-3">
     <div class="col-5">
         <div style="max-width: 900px; max-height: 500px;">
@@ -21,7 +44,7 @@
             labels: [1,2,3,4,5,6],
             datasets: [{
                 label: 'Real time data',
-                borderColor:'red',
+                borderColor:'blue',
                 data: [12, 19, 3, 5, 2, 3],
             }]
         },

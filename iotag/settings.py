@@ -70,8 +70,17 @@ TEMPLATES = [
     },
 ]
 
-#WSGI_APPLICATION = 'iotag.wsgi.application'
+WSGI_APPLICATION = 'iotag.wsgi.application'
 ASGI_APPLICATION = 'iotag.asgi.application'
+
+CHANNEL_LAYERS={
+    'default':{
+        "BACKEND":"channels.layers.InMemoryChannelLayer"
+    }
+}
+
+
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
