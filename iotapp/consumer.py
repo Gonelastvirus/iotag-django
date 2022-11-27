@@ -1,5 +1,5 @@
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-
+from django.contrib import messages
 import json
 
 class DashConsumer(AsyncJsonWebsocketConsumer):
@@ -22,16 +22,20 @@ class DashConsumer(AsyncJsonWebsocketConsumer):
     async def receive(self, text_data):
         datapoint = json.loads(text_data)
         val =datapoint['value']
-
+        node=datapoint['node']
+        token=datapoint['token']
         await self.channel_layer.group_send(
             self.groupname,
             {
                 'type':'deprocessing',
-                'value':val
+                'value':val,
+                'node':node,
+                'token':token
             }
         )
-        print ('>>>>',text_data)
-
+        print (f"{node}"+" "+f"{val}")
     async def deprocessing(self,event):
         valOther=event['value']
-        await self.send(text_data=json.dumps({'value':valOther}))
+        node=event['node']
+        token=event['token']
+        await self.send(text_data=json.dumps({'value':valOther,'node':node,'token':token}))

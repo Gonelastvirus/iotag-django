@@ -1,9 +1,16 @@
 {% extends "index.html" %}
 {% load static %}
 {% block content %}
-    <div class="row justify-content-center mb-3">
-        <div class="col-md-9 text-center">
-           
-        </div>
-    </div>
+<div class="container1">
+    <form class="form-signup" action="configure" method="post">
+        {% csrf_token %}
+        <h2><b>Device MAC</b></h2>
+        <p>Enter tyour device MAC for validating your real Data</p>
+        <div class="form-group">
+            
+            <input type="text" name="token" placeholder="Token" class="form-control" >
+         </div>
+        <input type="submit" class="btn btn-success btn-block" name="" value="submit">
+    </form>
+</div>     
 {% endblock  %}
