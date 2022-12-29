@@ -1,12 +1,18 @@
 from django.shortcuts import render,redirect
 # Create your views here.
 from django.contrib.auth.models import User
-from iotapp.models import Token
+#from iotapp.models import Token
 def index(request):
+    return render(request,'index.html')
+
+def show(request):
     user_id = request.user.id
-    token = Token.objects.filter(user_id=user_id).values()
-    print(token[0]['token'])
-    return render(request,'home.html', {"token": token[0]['token'],})
+    username = User.objects.get(id=user_id)
+    print(username)
+    #if len(token)!=0:
+        #return render(request,'home.html', {"token": token[0]['token'],})
+    #else:
+    return render(request,'show.html',{'username':username})#, {"token": token[0]['token'],})
 
 def setting(request):
     return render(request,'setting.html')

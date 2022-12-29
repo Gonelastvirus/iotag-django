@@ -19,7 +19,8 @@ from iotapp import views
 from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index,name='home'),
+    path('',views.index,name='index'),
+    path('show/',views.show,name='show'),
     path('configure',views.configure,name='configure'),
     path('setting/',views.setting,name='setting'),
     path('accounts/',include('accounts.urls')),

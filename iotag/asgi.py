@@ -17,15 +17,14 @@ from channels.auth import AuthMiddlewareStack
 
 from django.urls import path
 from iotapp import consumer
-
+#from token_auth import TokenMiddleware
 from django.contrib.auth.models import User
 
 
        
 websocket_urlPattern=[
-    path('polData',consumer.DashConsumer.as_asgi()),
+    path('show/<str:username>',consumer.DashConsumer.as_asgi()),
 ]
-
 application=ProtocolTypeRouter({
     # 'http':
     'websocket':AuthMiddlewareStack(URLRouter(websocket_urlPattern))

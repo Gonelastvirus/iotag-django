@@ -10,7 +10,7 @@ def login(request):
         if user is not None:
             auth.login(request,user)
             print("user authenticate")
-            return redirect("home")
+            return redirect("show")
 
         else:
             messages.info(request,"invalid credentials",'login.html')
@@ -43,9 +43,9 @@ def register(request):
                 return redirect('login')
         else:
             messages.info(request,"password not matching",'register.html')
-        return redirect('home') #once registration done go home page
+        return redirect('show') #once registration done go home page
     else:
         return render(request,'register.html')
 def logout(request):
     auth.logout(request)
-    return redirect("home")
+    return redirect("index")
